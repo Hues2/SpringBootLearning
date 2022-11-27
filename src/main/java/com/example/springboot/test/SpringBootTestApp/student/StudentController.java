@@ -1,9 +1,7 @@
 package com.example.springboot.test.SpringBootTestApp.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -23,6 +21,16 @@ public class StudentController {
     @GetMapping
     public List<Student> getStudents(){
         return studentService.getStudents();
+    }
+
+    @PostMapping("/add")
+    public void addStudent(@RequestBody Student student){
+        this.studentService.addStudent(student);
+    }
+
+    @DeleteMapping(path = "{studentId}")
+    public void removeStudent(@PathVariable("studentId") Long studentId){
+        this.studentService.removeStudent(studentId);
     }
 
 }
